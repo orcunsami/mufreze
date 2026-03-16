@@ -108,6 +108,8 @@ export MUFREZE_HOME="$HOME/.mufreze"
 - [Kimi CLI](https://github.com/kimi-ai/kimi-cli) — `pip install kimi-dev`
 - [Codex CLI](https://github.com/openai/codex) — `npm install -g @openai/codex`
 
+> **Note:** The `.claude-plugin/plugin.json` is included for forward compatibility with Claude Code's upcoming plugin marketplace. Native `/plugin install mufreze` support will be available once Anthropic ships that feature.
+
 ---
 
 ## Quick Start

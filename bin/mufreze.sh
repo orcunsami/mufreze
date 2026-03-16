@@ -6,7 +6,10 @@ set -euo pipefail
 
 # --- Environment Setup ---
 MUFREZE_HOME="${MUFREZE_HOME:-$HOME/.mufreze}"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve symlink to find actual bin dir
+_SELF="${BASH_SOURCE[0]}"
+while [[ -L "$_SELF" ]]; do _SELF="$(readlink "$_SELF")"; done
+SCRIPT_DIR="$(cd "$(dirname "$_SELF")" && pwd)"
 VERSION_FILE="$MUFREZE_HOME/VERSION"
 
 # --- Version Detection ---
