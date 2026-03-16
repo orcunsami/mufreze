@@ -1,0 +1,26 @@
+{
+  "mode": "delegation",
+  "version": "1.0.0",
+  "workers": {
+    "coder": "kimi",
+    "reviewer": "claude-sonnet-4-6",
+    "tester": "codex",
+    "architect": "claude-opus-4-6"
+  },
+  "retry": {
+    "max_attempts": 5,
+    "timeout_seconds": 180,
+    "escalate_chain": ["codex", "claude-sonnet-4-6", "claude-opus-4-6"]
+  },
+  "exp": {
+    "project_path": ".mufreze/exp/",
+    "global_path": "~/.mufreze/experiences/",
+    "auto_save": true,
+    "promote_threshold": 3
+  },
+  "verify": {
+    "run_syntax_check": true,
+    "run_type_check": true,
+    "fail_on_error": true
+  }
+}

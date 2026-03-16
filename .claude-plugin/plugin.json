@@ -1,0 +1,25 @@
+{
+  "name": "mufreze",
+  "version": "1.0.0",
+  "description": "Multi-LLM orchestration for Claude Code — delegate bulk code to Kimi/Codex, Claude plans and verifies. With self-learning EXP system.",
+  "author": "Orçun Sami Tandoğan",
+  "license": "MIT",
+  "repository": "https://github.com/orcunst/mufreze",
+  "keywords": ["multi-llm", "orchestration", "kimi", "codex", "delegation", "cost-optimization", "self-learning"],
+  "skills": [
+    "skills/delegate",
+    "skills/verify",
+    "skills/learn"
+  ],
+  "hooks": "hooks/hooks.json",
+  "commands": [
+    "commands/delegate.md",
+    "commands/new-project.md"
+  ],
+  "agents": [
+    "agents/architect.md",
+    "agents/coder.md",
+    "agents/reviewer.md",
+    "agents/tester.md"
+  ]
+}

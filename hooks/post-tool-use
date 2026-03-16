@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# MUFREZE — Post Tool Use Hook
+# Runs after every Bash tool call (async).
+# Detects mufreze delegate completions and triggers auto-EXP if configured.
+
+# Read tool output from stdin (Claude Code passes it)
+TOOL_INPUT=$(cat 2>/dev/null || true)
+
+PROJECT_DIR="${PWD}"
+CONFIG_FILE="$PROJECT_DIR/.mufreze/mufreze.json"
+
+# Only act if auto_save is enabled in config
+if [[ -f "$CONFIG_FILE" ]]; then
+    auto_save=$(grep -o '"auto_save"[[:space:]]*:[[:space:]]*[^,}]*' "$CONFIG_FILE" 2>/dev/null | grep -o 'true\|false' || echo "true")
+    if [[ "$auto_save" != "true" ]]; then
+        exit 0
+    fi
+fi
+
+# Check if this was a mufreze delegate call
+if echo "$TOOL_INPUT" | grep -q "mufreze.*delegate\|delegate\.sh"; then
+    # Async EXP creation happens in delegate.sh itself via learn.sh
+    # This hook is a backup for manual bash calls that bypass mufreze CLI
+    exit 0
+fi
+
+exit 0

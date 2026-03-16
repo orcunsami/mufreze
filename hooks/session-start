@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# MUFREZE — Session Start Hook
+# Runs on every Claude Code session start.
+# Checks worker availability and loads project config.
+
+MUFREZE_HOME="${MUFREZE_HOME:-$HOME/.mufreze}"
+PROJECT_DIR="${PWD}"
+CONFIG_FILE="$PROJECT_DIR/.mufreze/mufreze.json"
+
+# Worker availability check
+check_workers() {
+    local available=()
+    local missing=()
+
+    command -v kimi &>/dev/null && available+=("kimi") || missing+=("kimi")
+    command -v codex &>/dev/null && available+=("codex") || missing+=("codex")
+
+    if [[ ${#available[@]} -gt 0 ]]; then
+        echo "🎖️ MUFREZE: Workers available: ${available[*]}"
+    fi
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        echo "🎖️ MUFREZE: ⚠️  Workers not found: ${missing[*]} (solo mode only)"
+    fi
+}
+
+# Project config check
+check_project() {
+    if [[ -f "$CONFIG_FILE" ]]; then
+        local mode
+        mode=$(grep -o '"mode"[[:space:]]*:[[:space:]]*"[^"]*"' "$CONFIG_FILE" 2>/dev/null | grep -o '"[^"]*"$' | tr -d '"' || echo "delegation")
+        echo "🎖️ MUFREZE: Project configured (mode: $mode)"
+
+        local exp_count
+        exp_count=$(find "$PROJECT_DIR/.mufreze/exp/" -name "EXP-*.md" 2>/dev/null | wc -l | tr -d ' ')
+        if [[ "$exp_count" -gt 0 ]]; then
+            echo "🎖️ MUFREZE: 📚 $exp_count project experience(s) available"
+        fi
+    fi
+}
+
+check_workers
+check_project

@@ -1,0 +1,16 @@
+# MUFREZE project-local files
+.mufreze/exp/
+.mufreze/mufreze.json
+.mufreze/tasks/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (if any tooling added)
+node_modules/
