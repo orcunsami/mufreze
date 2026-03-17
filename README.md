@@ -93,13 +93,13 @@ Building production code with Claude Opus is powerful but expensive. Most coding
 ### One-liner (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/orcunst/mufreze/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/orcunsami/mufreze/main/install.sh | bash
 ```
 
 ### Manual Install
 
 ```bash
-git clone https://github.com/orcunst/mufreze.git ~/.mufreze
+git clone https://github.com/orcunsami/mufreze.git ~/.mufreze
 export PATH="$HOME/.mufreze/bin:$PATH"
 export MUFREZE_HOME="$HOME/.mufreze"
 ```

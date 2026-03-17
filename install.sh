@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # MUFREZE — One-line Installer
-# Usage: curl -fsSL https://raw.githubusercontent.com/orcunst/mufreze/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/orcunsami/mufreze/main/install.sh | bash
 #
 # What this does:
 # 1. Clones mufreze to ~/.mufreze
@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-REPO_URL="https://github.com/orcunst/mufreze.git"
+REPO_URL="https://github.com/orcunsami/mufreze.git"
 INSTALL_DIR="${MUFREZE_HOME:-$HOME/.mufreze}"
 CLAUDE_DIR="${CLAUDE_HOME:-$HOME/.claude}"
 
@@ -108,5 +108,5 @@ echo "  2. In your project: mufreze new-project /path/to/project"
 echo "  3. Fill in docs/MUFREZE-BRIEFING.md"
 echo "  4. Start delegating: mufreze delegate kimi 'task' /path/to/project"
 echo ""
-echo "Docs: https://github.com/orcunst/mufreze"
+echo "Docs: https://github.com/orcunsami/mufreze"
 echo ""
