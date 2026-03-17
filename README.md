@@ -12,6 +12,33 @@ Think of it as a smart project manager that knows when to delegate to fast/cheap
 
 ---
 
+## Demo
+
+```bash
+# Initialize a project
+mufreze new-project /path/to/myapp
+
+# Delegate a task to Kimi
+mufreze delegate kimi \
+  "Create a FastAPI router for user authentication with JWT" \
+  /path/to/myapp
+
+# 🎖️ MUFREZE: Attempt 1 - Worker: kimi (retry 1/5)
+# ✅ MUFREZE: Success on attempt 1 with kimi
+
+# Verify the output
+mufreze verify /path/to/myapp
+
+# ✅ MUFREZE: Python syntax OK (3 files)
+# ✅ MUFREZE: No type errors
+
+# Check what the system learned
+mufreze status /path/to/myapp
+# 📚 Experiences: 2 project experience(s) available
+```
+
+---
+
 ## Why?
 
 Building production code with Claude Opus is powerful but expensive. Most coding tasks don't need that level of reasoning.
