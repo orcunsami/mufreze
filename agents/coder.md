@@ -1,6 +1,8 @@
 ---
 name: mufreze-coder
 description: Coder role — executes atomic implementation tasks via Kimi (primary) or Codex (fallback)
+model: claude-sonnet-4-6
+tools: ["Bash", "Read", "Write", "Edit"]
 ---
 
 # Coder Agent

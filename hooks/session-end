@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# MUFREZE — Session End Hook
+# Saves session summary: tasks completed, EXPs created, workers used.
+
+PROJECT_DIR="${PWD}"
+EXP_DIR="$PROJECT_DIR/.mufreze/exp"
+LOG_DIR="$PROJECT_DIR/.mufreze/logs"
+
+# Only act if project has mufreze config
+[[ -f "$PROJECT_DIR/.mufreze/mufreze.json" ]] || exit 0
+
+mkdir -p "$LOG_DIR"
+
+timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+exp_count=$(find "$EXP_DIR" -name "EXP-*.md" 2>/dev/null | wc -l | tr -d ' ')
+
+cat >> "$LOG_DIR/sessions.log" <<EOF
+---
+end: $timestamp
+exp_count: $exp_count
+EOF
+
+echo "🎖️ MUFREZE: Session ended. $exp_count EXP(s) in project."

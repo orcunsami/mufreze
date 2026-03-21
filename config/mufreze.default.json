@@ -1,6 +1,6 @@
 {
   "mode": "delegation",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "workers": {
     "coder": "kimi",
     "reviewer": "claude-sonnet-4-6",

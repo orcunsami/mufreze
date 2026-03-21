@@ -1,6 +1,8 @@
 ---
 name: mufreze-reviewer
 description: Reviewer role — verifies worker output quality, security, and convention compliance
+model: claude-sonnet-4-6
+tools: ["Read", "Grep", "Glob", "Bash"]
 ---
 
 # Reviewer Agent

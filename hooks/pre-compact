@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# MUFREZE — Pre-Compact Hook
+# Fires before Claude compresses context. Saves active task state.
+
+PROJECT_DIR="${PWD}"
+STATE_DIR="$PROJECT_DIR/.mufreze/state"
+
+[[ -f "$PROJECT_DIR/.mufreze/mufreze.json" ]] || exit 0
+
+mkdir -p "$STATE_DIR"
+
+timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+# Save pending tasks list
+if [[ -d "$PROJECT_DIR/.mufreze/tasks" ]]; then
+    task_count=$(find "$PROJECT_DIR/.mufreze/tasks" -type f 2>/dev/null | wc -l | tr -d ' ')
+    echo "compact_at: $timestamp" > "$STATE_DIR/last-compact.yml"
+    echo "pending_tasks: $task_count" >> "$STATE_DIR/last-compact.yml"
+fi
+
+echo "🎖️ MUFREZE: Context compacting — state saved."

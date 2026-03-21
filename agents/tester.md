@@ -1,6 +1,8 @@
 ---
 name: mufreze-tester
 description: Tester role — delegates test file creation to Codex, runs tests, reports results
+model: claude-haiku-4-5
+tools: ["Bash", "Read", "Grep"]
 ---
 
 # Tester Agent

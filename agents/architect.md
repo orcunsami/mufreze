@@ -1,6 +1,8 @@
 ---
 name: mufreze-architect
 description: Architect role — breaks down features into atomic tasks for delegation. Uses Claude Opus.
+model: claude-opus-4-6
+tools: ["Read", "Glob", "Grep", "Bash"]
 ---
 
 # Architect Agent
