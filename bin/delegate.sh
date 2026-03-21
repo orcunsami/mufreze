@@ -68,9 +68,19 @@ run_worker() {
         codex)
             codex exec --full-auto -C "$dir" "$prompt"
             ;;
-        claude-sonnet|claude-opus|claude-sonnet-4-6|claude-opus-4-6)
-            echo "${E_WARN} Claude delegation not yet implemented" >&2
-            return 2  # special code for escalation
+        claude-sonnet|claude-sonnet-4-6)
+            local llm_script
+            llm_script="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/llm-route.py"
+            "${MUFREZE_HOME:-$HOME/.mufreze}/.venv/bin/python3" "$llm_script" \
+                "anthropic/claude-sonnet-4-6" \
+                "You are a senior developer. Work in directory: $dir. Task: $prompt"
+            ;;
+        claude-opus|claude-opus-4-6)
+            local llm_script
+            llm_script="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/llm-route.py"
+            "${MUFREZE_HOME:-$HOME/.mufreze}/.venv/bin/python3" "$llm_script" \
+                "anthropic/claude-opus-4-6" \
+                "You are a senior architect. Work in directory: $dir. Task: $prompt"
             ;;
         *)
             echo "${E_FAILURE} Unknown worker: $w" >&2

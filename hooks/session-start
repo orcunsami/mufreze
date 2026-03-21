@@ -40,3 +40,11 @@ check_project() {
 
 check_workers
 check_project
+
+# Quiet EXP sync (don't block session start)
+if [[ -x "$MUFREZE_HOME/bin/exp-sync.sh" ]]; then
+    total=$("$MUFREZE_HOME/bin/exp-sync.sh" both 2>/dev/null | grep "Index:" | grep -o '[0-9]*' || echo "0")
+    if [[ "$total" -gt 0 ]]; then
+        echo "🎖️ MUFREZE: 📚 $total unified EXP(s) synced"
+    fi
+fi

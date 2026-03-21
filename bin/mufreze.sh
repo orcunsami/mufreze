@@ -45,6 +45,11 @@ SUBCOMMANDS:
         Delegate a task to a worker (kimi, codex, claude-sonnet, claude-opus)
         Example: mufreze delegate kimi 'Create users.py with FastAPI router' /path/to/project
 
+    parallel <tasks_file> <path> [max_concurrent]
+        Run multiple tasks in parallel (default: 4 concurrent)
+        Tasks file: one "worker|prompt" per line
+        Example: mufreze parallel tasks.txt /path/to/project 4
+
     verify <path>
         Verify a completed task in the specified project directory
         Example: mufreze verify /path/to/project
@@ -61,6 +66,14 @@ SUBCOMMANDS:
     new-project <path>
         Initialize a new MUFREZE project
         Example: mufreze new-project /path/to/project
+
+    exp-sync [direction]
+        Sync experiences between Elder MCP and MUFREZE (pull/push/both)
+        Example: mufreze exp-sync both
+
+    llm <model> <prompt> [--fallback models] [--json]
+        Route a prompt through LiteLLM with fallbacks and cost tracking
+        Example: mufreze llm anthropic/claude-sonnet-4-6 "Review this code" --json
 
     help
         Show this help message
@@ -89,6 +102,13 @@ route_subcommand() {
             fi
             exec "$SCRIPT_DIR/delegate.sh" "$@"
             ;;
+        parallel)
+            if [[ $# -lt 2 ]]; then
+                error "Usage: mufreze parallel <tasks_file> <path> [max_concurrent]"
+                exit 1
+            fi
+            exec "$SCRIPT_DIR/parallel.sh" "$@"
+            ;;
         verify)
             if [[ $# -lt 1 ]]; then
                 error "Usage: mufreze verify <path>"
@@ -112,6 +132,12 @@ route_subcommand() {
                 exit 1
             fi
             exec "$SCRIPT_DIR/new-project.sh" "$@"
+            ;;
+        exp-sync)
+            exec "$SCRIPT_DIR/exp-sync.sh" "$@"
+            ;;
+        llm)
+            exec "${MUFREZE_HOME:-$HOME/.mufreze}/.venv/bin/python3" "$SCRIPT_DIR/llm-route.py" "$@"
             ;;
         help|--help|-h|"")
             show_help

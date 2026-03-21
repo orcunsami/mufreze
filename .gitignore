@@ -14,3 +14,4 @@ Thumbs.db
 
 # Node (if any tooling added)
 node_modules/
+.venv/
